@@ -5,7 +5,7 @@ import {VirtualService} from "../jeedom/VirtualService";
 
 const Gpio = require('onoff').Gpio;
 const button = new Gpio(3, 'in', 'both');
-const test = new Gpio(24, 'out');
+// const test = new Gpio(24, 'out');
 
 export class DoorBell {
 
@@ -38,6 +38,18 @@ export class DoorBell {
     }
 }
 
-new DoorBell().startPolling();
 
-test.writeSync(1);
+
+// set BCM 4 pin as 'output'
+const ledOut = new Gpio( '24', 'out' );
+
+// current LED state
+let isLedOn = false;
+
+// run a infinite interval
+setInterval( () => {
+    ledOut.writeSync( isLedOn ? 0 : 1 ); // provide 1 or 0
+    isLedOn = !isLedOn; // toggle state
+}, 3000 ); // 3s
+
+new DoorBell().startPolling();
