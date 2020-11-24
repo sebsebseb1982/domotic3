@@ -4,7 +4,7 @@ import {Logger} from "../common/logger/logger";
 import {VirtualService} from "../jeedom/VirtualService";
 
 const Gpio = require('onoff').Gpio;
-const button = new Gpio(4, 'in', 'rising', {debounceTimeout: 10});
+const button = new Gpio(3, 'in', 'both');
 
 export class DoorBell {
 
