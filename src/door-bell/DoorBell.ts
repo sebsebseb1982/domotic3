@@ -38,6 +38,6 @@ export class DoorBell {
     }
 }
 
-//new DoorBell().startPolling();
+new DoorBell().startPolling();
 
 test.writeSync(1);
