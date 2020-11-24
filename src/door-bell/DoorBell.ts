@@ -35,3 +35,5 @@ export class DoorBell {
         });
     }
 }
+
+new DoorBell().startPolling();
