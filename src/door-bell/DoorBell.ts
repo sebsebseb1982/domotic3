@@ -21,6 +21,7 @@ export class DoorBell {
 
     startPolling(): void {
         button.watch((err, value) => {
+            this.logger.info(`Appui sur la sonnette`);
             if (err) {
                 this.logger.error(`Erreur lors de l'attente d'un appui sur la sonnette`, err.message);
             }
