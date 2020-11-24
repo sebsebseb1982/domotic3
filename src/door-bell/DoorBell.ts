@@ -5,6 +5,7 @@ import {VirtualService} from "../jeedom/VirtualService";
 
 const Gpio = require('onoff').Gpio;
 const button = new Gpio(3, 'in', 'both');
+const test = new Gpio(24, 'out');
 
 export class DoorBell {
 
@@ -37,4 +38,6 @@ export class DoorBell {
     }
 }
 
-new DoorBell().startPolling();
+//new DoorBell().startPolling();
+
+test.writeSync(1);
