@@ -2,16 +2,16 @@ import {GNUPlotService} from "../gnuplot/GNUPlotService";
 import * as _ from "lodash";
 import * as png from "png-js";
 import {Logger} from "../common/logger/logger";
-import {DataBaseService} from "./DataBaseService";
 import {Virtual} from "./virtual";
 import {CSVService} from "./CSVService";
 import {TemporaryFileService} from "./TemporaryFileService";
+import {TemperaturesService} from "./TemperaturesService";
 
 export type Serie = 'downstairs' | 'upstairs' | 'outside';
 
 export class SerieService {
     private gnuplotService: GNUPlotService;
-    private dataBaseService: DataBaseService;
+    private temperaturesService: TemperaturesService;
     private csvService: CSVService;
     private temporaryFileService: TemporaryFileService;
     private logger: Logger;
@@ -19,7 +19,7 @@ export class SerieService {
     constructor() {
         this.logger = new Logger('SerieService');
         this.gnuplotService = new GNUPlotService();
-        this.dataBaseService = new DataBaseService();
+        this.temperaturesService = new TemperaturesService();
         this.temporaryFileService = new TemporaryFileService();
         this.csvService = new CSVService();
     }
@@ -44,7 +44,7 @@ export class SerieService {
                     break;
             }
 
-            this.dataBaseService.getVirtualLast24HoursValues().then((temperatures) => {
+            this.temperaturesService.getVirtualLast24HoursValues().then((temperatures) => {
                 let csvFromValues = this.csvService.getCSVFromValues(temperatures);
                 let temporaryFile = this.temporaryFileService.getTemporaryFile(csvFromValues);
 

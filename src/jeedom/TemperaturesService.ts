@@ -4,21 +4,13 @@ import {Logger} from "../common/logger/logger";
 import {Temperature} from "./virtual";
 import * as mysql from "mysql";
 import _ = require("lodash");
+import {dbConnection} from "./DataBaseConnection";
 
-export class DataBaseService {
-    private configuration: IConfiguration;
+export class TemperaturesService {
     private logger: Logger;
-    private connection;
 
     constructor() {
-        this.configuration = new Configuration();
-        this.logger = new Logger('Base de donnée Jeedom');
-        this.connection = mysql.createConnection({
-            host: this.configuration.jeedom.hostname,
-            user: this.configuration.jeedom.db.user,
-            password: this.configuration.jeedom.db.password,
-            database: this.configuration.jeedom.db.name
-        });
+        this.logger = new Logger('TemperaturesService');
     }
 
     getVirtualLast24HoursValues(): Promise<Temperature[]> {
@@ -34,8 +26,6 @@ export class DataBaseService {
                   order by datetime
               `;*/
 
-            this.connection.connect();
-
             let query = `
                 select datetime, CONCAT('{', GROUP_CONCAT('"', cmd_id, '":', value SEPARATOR ','), '}') as temperatures
                 from history
@@ -43,7 +33,7 @@ export class DataBaseService {
                 group by datetime
             `;
             let temperatures: Temperature[] = [];
-            this.connection.query(
+            dbConnection.query(
                 query,
                 (error, results, fields) => {
                     if (error) throw error;
@@ -58,8 +48,6 @@ export class DataBaseService {
                     resolve(temperatures);
                 }
             );
-
-            this.connection.end();
         });
     }
 
