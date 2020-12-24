@@ -2,7 +2,8 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Auth} from "../common/authentification/auth";
 import {Configuration} from "../configuration/configuration";
-import {GateRoutes} from "./routes/gate-routes";
+import {SeriesRoutes} from "./routes/SeriesRoutes";
+import {GateRoutes} from "./routes/GateRoutes";
 
 class App {
     public app: express.Application;
@@ -19,6 +20,7 @@ class App {
 
         // Routes
         new GateRoutes().routes(router);
+        new SeriesRoutes().routes(router);
 
         this.app.use(this.configuration.api.root, router);
     }
