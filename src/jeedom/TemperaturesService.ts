@@ -37,6 +37,7 @@ export class TemperaturesService {
                 where cmd_id in (314, 315, 320)
                 and datetime > DATE_SUB(CURDATE(), INTERVAL 1 DAY)
                 group by datetime
+                order by datetime
             `;
             let temperatures: Temperature[] = [];
             dbConnection.query(

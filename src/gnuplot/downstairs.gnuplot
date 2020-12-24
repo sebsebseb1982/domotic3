@@ -17,7 +17,7 @@ set xdata time
 #set timefmt "%Y-%m-%dT%H:%M:%S"
 set timefmt "%Y-%m-%d %H:%M:%S"
 set format x "%H:%M"
-set xtics 3600
+set xtics 14400
 #set tics scale 0
 #unset border
 #unset ytics
