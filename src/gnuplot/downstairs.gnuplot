@@ -15,9 +15,9 @@ set ytics 2
 #set grid xtics ytics ls 6
 set xdata time
 #set timefmt "%Y-%m-%dT%H:%M:%S"
-set timefmt "%d/%m/%Y"
+set timefmt "%Y-%m-%d %H:%M:%S"
 set format x "%H:%M"
-set xtics 60
+set xtics 3600
 #set tics scale 0
 #unset border
 #unset ytics
