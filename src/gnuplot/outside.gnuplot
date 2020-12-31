@@ -8,7 +8,7 @@ set lmargin 3
 set rmargin 0.5
 set tmargin 0.5
 set bmargin 2.5
-set for [i=1:8] linetype i dashtype 2
+set for [i=1:8] linetype i dashtype 3
 set style line 1 lt 2 lw lineWidth lc rgb 'blue'
 set style line 6 lt 2 lw 1 lc rgb 'white'
 set ytics 2
