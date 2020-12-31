@@ -35,7 +35,7 @@ export class TemperaturesService {
                 select datetime, CONCAT('{', GROUP_CONCAT('"', cmd_id, '":', value SEPARATOR ','), '}') as temperatures
                 from historyArch
                 where cmd_id in (314, 315, 320)
-                and datetime >= now() - INTERVAL 1 DAY
+                  and datetime >= now() - INTERVAL 1 DAY
                 group by datetime
                 order by datetime
             `;
@@ -43,7 +43,7 @@ export class TemperaturesService {
             dbConnection.query(
                 query,
                 (error, results, fields) => {
-                    if (error) throw error;
+                    if (error) reject(error);
                     _.forEach(results, (result) => {
                         temperatures.push({
                             datetime: result.datetime,
